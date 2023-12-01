@@ -1,0 +1,21 @@
+name: Test Work deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        type: choice
+        default: choice1
+        description: 'Choice'
+        options:
+          - "choice1"
+          - "choice2"
+
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: hello world
+        run: echo "Hello world"
+        shell: bash
