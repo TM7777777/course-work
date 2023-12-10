@@ -1,45 +1,54 @@
-import React, { Suspense } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import React from "react";
+import { Router, Route, Switch } from "wouter";
 
-// Імпортуйте ваші сторінки тут
-// import HomePage from './pages/HomePage';
+import AdminPanel from "../packages/AdminPanel";
 import Auth from "../packages/Auth";
-import EnterprisesManager from "../packages/Main";
-import EnterpriseDetails from "../packages/Main/components/EnterpriseDetails";
-// import RegisterPage from './pages/RegisterPage';
-// import NotFoundPage from './pages/NotFoundPage';
+import Main from "../packages/Main";
+
+import wrapDynamicImport from "../packages/common/hocs/wrapDynamicImport";
+import { Role } from "../packages/types/role";
+
+import NotFoundPage from "./components/NotFoundPage";
+
+import { useIsLogged } from "./useIsLogged";
+
+const panels = {
+  [Role.USER]: (
+    <>
+      <Route path="/enterprises" component={() => wrapDynamicImport(Main.EnterprisesManager)} />
+      <Route
+        path="/enterprise/:enterpriseId"
+        component={() => wrapDynamicImport(Main.EnterpriseDetails)}
+      />
+    </>
+  ),
+  [Role.ADMIN]: (
+    <>
+      <Route path="/users-panel" component={() => wrapDynamicImport(AdminPanel.UserPanel)} />
+      <Route
+        path="/edit-performance-indicators"
+        component={() => wrapDynamicImport(AdminPanel.EditPerformanceIndicators)}
+      />
+    </>
+  ),
+};
+
+const logPanel = (
+  <>
+    <Route path="/login" component={() => wrapDynamicImport(Auth.Login)} />
+    <Route path="/register" component={() => wrapDynamicImport(Auth.SignUp)} />
+  </>
+);
 
 const App: React.FC = () => {
+  const role = useIsLogged();
+
   return (
     <Router>
-      <nav>
-        {/* Навігаційні посилання */}
-        <Link to="/">Home</Link>
-        <Link to="/login">Login</Link>
-        <Link to="/register">Register</Link>
-      </nav>
-
-      <Routes>
-        <Route path="/" element={<EnterprisesManager />} />
-        <Route path="/enterprise/:id" element={<EnterpriseDetails />} />
-        <Route
-          path="/login"
-          element={
-            <Suspense>
-              <Auth.Login />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/register"
-          element={
-            <Suspense>
-              <Auth.SignUp />
-            </Suspense>
-          }
-        />
-        {/* <Route path="*" element={<NotFoundPage />} /> */}
-      </Routes>
+      <Switch>
+        {role ? panels[role] : logPanel}
+        <Route path="/:rest*" component={() => <NotFoundPage role={role} />} />
+      </Switch>
     </Router>
   );
 };

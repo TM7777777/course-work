@@ -2,6 +2,8 @@ import React, { Suspense, memo, lazy, ComponentType, createElement, useCallback 
 import { atom } from "recoil";
 import isEqual from "lodash/isEqual";
 import omit from "lodash/omit";
+import uniqueId from "lodash/uniqueId";
+
 import { useImRecoilState } from "../common/hooks/useImRecoilState";
 import Loader from "../common/components/Loader";
 
@@ -12,9 +14,11 @@ const modals = new Map<string, ComponentType<any>>();
 
 export type ExtendModalProps<T> = T & { onClose: () => void };
 
+type DynamicImport<P> = () => Promise<{ default: ComponentType<ExtendModalProps<P>> }>;
+
 type OpenModalProps<T> = {
-  id: string;
-  dynamicImport: () => Promise<{ default: ComponentType<ExtendModalProps<T>> }>;
+  __modalId: string;
+  dynamicImport: DynamicImport<T>;
 };
 
 const modalsState = atom<Record<string, UnknownProps>>({
@@ -22,10 +26,13 @@ const modalsState = atom<Record<string, UnknownProps>>({
   default: {},
 });
 
-export const loadModal = <T,>({ id, dynamicImport }: OpenModalProps<T>, props?: T) => {
-  modals.set(id, lazy(dynamicImport));
+export const createModal = <P,>(dynamicImport: DynamicImport<P>) =>
+  Object.assign({}, { dynamicImport, __modalId: uniqueId() });
 
-  return { id, props: props || {} };
+export const loadModal = <T,>({ __modalId, dynamicImport }: OpenModalProps<T>, props?: T) => {
+  modals.set(__modalId, lazy(dynamicImport));
+
+  return { id: __modalId, props: props || {} };
 };
 
 export const useShowModal = () => {
@@ -55,7 +62,7 @@ const PureModalProvider = () => {
           const Component = modals.get(id);
 
           if (Component) {
-            Object.assign(Component, { displayName: `Modal-${id}` });
+            Object.assign(Component, { displayName: `Modal-${Component.displayName || "-"}${id}` });
 
             return createElement(Component, {
               key: id,
