@@ -2,6 +2,9 @@ import React from "react";
 import { Paper, Box, TextField, Button, Typography, Container } from "@mui/material";
 import * as yup from "yup";
 import { useFormik } from "formik";
+import omit from "lodash/omit";
+import { useLocation } from "wouter";
+import service from "../../../service";
 
 const paperStyle = {
   padding: "20px",
@@ -27,6 +30,8 @@ const validationSchema = yup.object({
 });
 
 const SignUpPage: React.FC = () => {
+  const [_, navigate] = useLocation();
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -35,8 +40,7 @@ const SignUpPage: React.FC = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log("values", values);
-      // Обробка даних форми
+      service.register(omit(values, "confirmPassword")).then(() => navigate("/login"));
     },
   });
 
@@ -51,7 +55,7 @@ const SignUpPage: React.FC = () => {
         }}>
         <Paper elevation={10} style={paperStyle}>
           <Typography component="h1" variant="h5" style={{ textAlign: "center", margin: "20px 0" }}>
-            Login
+            Sign Up
           </Typography>
           <Box component="form" onSubmit={formik.handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField

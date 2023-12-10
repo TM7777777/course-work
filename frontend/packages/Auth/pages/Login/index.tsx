@@ -1,7 +1,10 @@
 import React from "react";
+import сookies from "js-cookie";
+import { useLocation, Link } from "wouter";
 import { Paper, Box, TextField, Button, Typography, Container } from "@mui/material";
 import * as yup from "yup";
 import { useFormik } from "formik";
+import service from "../../../service";
 
 const paperStyle = {
   padding: "20px",
@@ -23,6 +26,8 @@ const validationSchema = yup.object({
 });
 
 const LoginPage: React.FC = () => {
+  const [_, navigate] = useLocation();
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -30,8 +35,21 @@ const LoginPage: React.FC = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log('values', values);
-      // Обробка даних форми
+      service.login(values).then(({ user_id, role }) => {
+        сookies.set("user_id", user_id, {
+          expires: 1,
+          sameSite: "none",
+          secure: true,
+        });
+
+        сookies.set("role", role, {
+          expires: 1,
+          sameSite: "none",
+          secure: true,
+        });
+
+        return navigate("/enterprises");
+      });
     },
   });
 
@@ -75,6 +93,7 @@ const LoginPage: React.FC = () => {
             <Button type="submit" fullWidth variant="contained" style={btnStyle}>
               Login
             </Button>
+            Doesn't have an account? <Link href="register">Sign Up</Link>
           </Box>
         </Paper>
       </Box>
