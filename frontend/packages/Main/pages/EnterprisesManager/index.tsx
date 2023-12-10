@@ -1,6 +1,6 @@
 import React from "react";
 
-import Logout from "../../../common/components/Logout";
+import Logout from "work-common/components/Logout";
 
 import EnterpriseCreateButton from "./components/EnterpriseCreateButton";
 import EnterprisesList from "./components/EnterprisesList";

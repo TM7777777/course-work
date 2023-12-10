@@ -4,8 +4,8 @@ import isEqual from "lodash/isEqual";
 import omit from "lodash/omit";
 import uniqueId from "lodash/uniqueId";
 
-import { useImRecoilState } from "../common/hooks/useImRecoilState";
-import Loader from "../common/components/Loader";
+import { useImRecoilState } from "work-common/hooks/useImRecoilState";
+import Loader from "work-common/components/Loader";
 
 type UnknownProps = Record<string, unknown>;
 

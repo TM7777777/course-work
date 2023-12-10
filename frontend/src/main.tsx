@@ -1,7 +1,7 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { RecoilRoot } from "recoil";
-import { ModalProvider } from "../packages/modals";
+import { ModalProvider } from "work-modals";
 import App from "./App";
 import "./index.css";
 

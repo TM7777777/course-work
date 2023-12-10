@@ -1,12 +1,11 @@
 import React, { useCallback } from "react";
 import { Button } from "@mui/material";
 
-import { IEnterprise } from "../../../../../types/enterprise";
-import service from "../../../../../service";
-
-import { useShowModal } from "../../../../../modals";
-import { openEnterpriseModal } from "../../../../../modals/EnterpriseModal";
-import { useImSetRecoilState } from "../../../../../common/hooks/useImSetRecoilState";
+import { IEnterprise } from "work-types/enterprise";
+import { useShowModal } from "work-modals";
+import { openEnterpriseModal } from "work-modals/EnterpriseModal";
+import { useImSetRecoilState } from "work-common/hooks/useImSetRecoilState";
+import service from "work-service";
 
 import { enterprisesState } from "../../../../state/enterprises";
 

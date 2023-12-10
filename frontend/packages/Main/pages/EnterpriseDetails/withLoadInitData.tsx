@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "wouter";
 import { useSetRecoilState } from "recoil";
 
-import Loader from "../../../common/components/Loader";
-import service from "../../../service";
+import Loader from "work-common/components/Loader";
+import { performanceIndicatorsState } from "work-common/state/performanceIndicators";
+import service from "work-service";
+
 import { selectedEnterprise } from "../../state/selectedEnterprise";
-import { performanceIndicatorsState } from "../../../common/state/performanceIndicators";
 
 export const withLoadInitData =
   (Component: React.FC): React.FC =>

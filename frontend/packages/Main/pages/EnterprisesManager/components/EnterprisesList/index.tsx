@@ -5,15 +5,15 @@ import { Card, ListItem, ListItemText, ListItemAvatar, Avatar, IconButton } from
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 
-import { useShowModal } from "../../../../../modals";
-import { openDeleteModal } from "../../../../../modals/DeleteModal";
-import { useImRecoilState } from "../../../../../common/hooks/useImRecoilState";
-import { IEnterprise } from "../../../../../types/enterprise";
-import service from "../../../../../service";
+import { useShowModal } from "work-modals";
+import { openDeleteModal } from "work-modals/DeleteModal";
+import { openEnterpriseModal } from "work-modals/EnterpriseModal";
+import { useImRecoilState } from "work-common/hooks/useImRecoilState";
+import { IEnterprise } from "work-types/enterprise";
+import service from "work-service";
 
 import { enterprisesTotalIncomeState } from "../../../../state/enterprisesTotalIncome";
 import { enterprisesState } from "../../../../state/enterprises";
-import { openEnterpriseModal } from "../../../../../modals/EnterpriseModal";
 
 const EnterprisesList = () => {
   const [enterprises, setEnterprises] = useImRecoilState(enterprisesState);

@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import { IEnterprise } from "../../types/enterprise";
+import { IEnterprise } from "work-types/enterprise";
 
 export const enterprisesState = atom<IEnterprise[]>({
   key: "enterprisesState",

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useLocation } from "wouter";
-import { Role } from "../../packages/types/role";
+import { Role } from "work-types";
 
 const mainPages = {
   [Role.USER]: "/enterprises",

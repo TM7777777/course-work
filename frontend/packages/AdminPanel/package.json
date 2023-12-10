@@ -1,0 +1,22 @@
+{
+  "name": "work-adminpanel",
+  "version": "0.0.0",
+  "type": "module",
+  "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.14.18",
+    "@mui/material": "^5.14.0",
+    "react": "^18.2.0",
+    "recoil": "^0.7.7",
+    "wouter": "^2.12.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.37",
+    "typescript": "^5.0.2",
+    "work-types": "*",
+    "work-common": "*",
+    "work-modals": "*",
+    "work-service": "*"
+  }
+}

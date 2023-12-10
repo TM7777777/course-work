@@ -2,14 +2,15 @@ import React, { useMemo } from "react";
 import { useRecoilValue } from "recoil";
 import { Typography, Paper, Divider, Grid } from "@mui/material";
 
+import { performanceIndicatorsState } from "work-common/state/performanceIndicators";
+import { Indicator } from "work-types/performanceIndicator";
+
+import { selectedEnterprise } from "../../state/selectedEnterprise";
+
+import PerformanceIndicatorChart from "./components/PerformanceIndicatorChart";
 import PerformanceGraph from "./components/PerformanceGraph";
 import CreateTaxFormButton from "./components/CreateTaxFormButton";
 import { withLoadInitData } from "./withLoadInitData";
-
-import { selectedEnterprise } from "../../state/selectedEnterprise";
-import PerformanceIndicatorChart from "./components/PerformanceIndicatorChart";
-import { performanceIndicatorsState } from "../../../common/state/performanceIndicators";
-import { Indicator } from "../../../types/performanceIndicator";
 
 const EnterpriseDetails = () => {
   const { enterprise, reports } = useRecoilValue(selectedEnterprise);

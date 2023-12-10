@@ -1,10 +1,15 @@
 import axios, { AxiosInstance } from "axios";
 import { prop } from "ramda";
 
-import { IEnterprise, IEnterpriseTotalIncome, ISelectedEnterprise } from "../types/enterprise";
-import { IPerformanceIndicator } from "../types/performanceIndicator";
-import { IReport, IReportDTO } from "../types/report";
-import { IUser } from "../types/user";
+import {
+  IEnterprise,
+  IEnterpriseTotalIncome,
+  ISelectedEnterprise,
+  IPerformanceIndicator,
+  IReport,
+  IReportDTO,
+  IUser,
+} from "work-types";
 
 class API {
   protected BASE_URL: string = "http://localhost:4500";

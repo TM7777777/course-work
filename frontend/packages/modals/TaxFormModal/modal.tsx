@@ -14,10 +14,9 @@ import {
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { pipe, omit } from "ramda";
+import { IReportDTO, IPerformanceIndicator } from "work-types";
 
 import { Props } from "./types";
-import { IReportDTO } from "../../types/report";
-import { IPerformanceIndicator } from "../../types/performanceIndicator";
 
 const style = {
   position: "absolute",

@@ -1,5 +1,5 @@
 import React from "react";
-import Logout from "../../../common/components/Logout";
+import Logout from "work-common/components/Logout";
 
 import UsersList from "./components/UserList";
 import EditPerformanceIndicatorsButton from "./components/EditPerformanceIndicatorsButton";
