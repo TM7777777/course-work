@@ -2,9 +2,9 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useSetRecoilState } from "recoil";
 
-import Loader from "../../../common/components/Loader";
+import Loader from "work-common/components/Loader";
+import service from "work-service";
 
-import service from "../../../service";
 import { usersState } from "../../state/users";
 
 export const withLoadInitData =

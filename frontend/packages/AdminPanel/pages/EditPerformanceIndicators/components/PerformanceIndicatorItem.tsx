@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, CardContent, Typography, CardActions, Button } from "@mui/material";
-import { IPerformanceIndicator } from "../../../../types/performanceIndicator";
+import { IPerformanceIndicator } from "work-types/performanceIndicator";
 
 interface Props {
   indicator: IPerformanceIndicator;

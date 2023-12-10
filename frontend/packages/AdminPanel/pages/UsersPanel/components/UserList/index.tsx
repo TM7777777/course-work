@@ -2,14 +2,13 @@ import React, { useCallback } from "react";
 import { Card, ListItem, ListItemText, ListItemAvatar, Avatar, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-import { useImRecoilState } from "../../../../../common/hooks/useImRecoilState";
-
-import { useShowModal } from "../../../../../modals";
-import { openDeleteModal } from "../../../../../modals/DeleteModal";
+import { useImRecoilState } from "work-common/hooks/useImRecoilState";
+import { useShowModal } from "work-modals";
+import { openDeleteModal } from "work-modals/DeleteModal";
+import { IUser } from "work-types/user";
+import service from "work-service";
 
 import { usersState } from "../../../../state/users";
-import { IUser } from "../../../../../types/user";
-import service from "../../../../../service";
 
 const UsersList = () => {
   const [users, setUsers] = useImRecoilState(usersState);

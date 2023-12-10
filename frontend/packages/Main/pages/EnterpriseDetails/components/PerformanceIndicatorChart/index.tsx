@@ -9,7 +9,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { Indicator } from "../../../../../types/performanceIndicator";
+import { Indicator } from "work-types/performanceIndicator";
 
 interface Props {
   indicator: Indicator;

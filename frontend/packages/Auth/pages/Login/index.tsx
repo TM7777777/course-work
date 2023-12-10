@@ -4,7 +4,7 @@ import { useLocation, Link } from "wouter";
 import { Paper, Box, TextField, Button, Typography, Container } from "@mui/material";
 import * as yup from "yup";
 import { useFormik } from "formik";
-import service from "../../../service";
+import service from "work-service";
 
 const paperStyle = {
   padding: "20px",

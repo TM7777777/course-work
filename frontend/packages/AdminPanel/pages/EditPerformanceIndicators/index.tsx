@@ -1,14 +1,12 @@
 import React, { useCallback } from "react";
 import { Container, Typography } from "@mui/material";
 
-import { performanceIndicatorsState } from "../../../common/state/performanceIndicators";
-import { useImRecoilState } from "../../../common/hooks/useImRecoilState";
-import { IPerformanceIndicator } from "../../../types/performanceIndicator";
-
-import { useShowModal } from "../../../modals";
-import { openDeleteModal } from "../../../modals/DeleteModal";
-
-import service from "../../../service";
+import { IPerformanceIndicator } from "work-types/performanceIndicator";
+import { performanceIndicatorsState } from "work-common/state/performanceIndicators";
+import { useImRecoilState } from "work-common/hooks/useImRecoilState";
+import { useShowModal } from "work-modals";
+import { openDeleteModal } from "work-modals/DeleteModal";
+import service from "work-service";
 
 import CreatePerformanceIndicator from "./components/CreatePerformanceIndicator";
 import PreviewTaxForm from "./components/PreviewTaxForm";

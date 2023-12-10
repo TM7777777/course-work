@@ -1,12 +1,12 @@
 import React, { useCallback } from "react";
 import { Button } from "@mui/material";
-import { useShowModal } from "../../../../modals";
-import { useImSetRecoilState } from "../../../../common/hooks/useImSetRecoilState";
-import { performanceIndicatorsState } from "../../../../common/state/performanceIndicators";
-import { openCreatePerformanceIndicator } from "../../../../modals/CreatePerformanceIndicatorModal";
 
-import service from "../../../../service";
-import { IPerformanceIndicator } from "../../../../types/performanceIndicator";
+import { useShowModal } from "work-modals";
+import { useImSetRecoilState } from "work-common/hooks/useImSetRecoilState";
+import { performanceIndicatorsState } from "work-common/state/performanceIndicators";
+import { openCreatePerformanceIndicator } from "work-modals/CreatePerformanceIndicatorModal";
+import { IPerformanceIndicator } from "work-types/performanceIndicator";
+import service from "work-service";
 
 const CreatePerformanceIndicator = () => {
   const showModal = useShowModal();

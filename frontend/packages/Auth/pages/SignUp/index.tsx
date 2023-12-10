@@ -4,7 +4,7 @@ import * as yup from "yup";
 import { useFormik } from "formik";
 import omit from "lodash/omit";
 import { useLocation } from "wouter";
-import service from "../../../service";
+import service from "work-service";
 
 const paperStyle = {
   padding: "20px",

@@ -1,12 +1,11 @@
 import React from "react";
 import { Router, Route, Switch } from "wouter";
 
-import AdminPanel from "../packages/AdminPanel";
-import Auth from "../packages/Auth";
-import Main from "../packages/Main";
-
-import wrapDynamicImport from "../packages/common/hocs/wrapDynamicImport";
-import { Role } from "../packages/types/role";
+import AdminPanel from "work-adminpanel";
+import Auth from "work-auth";
+import Main from "work-main";
+import wrapDynamicImport from "work-common/hocs/wrapDynamicImport";
+import { Role } from "work-types";
 
 import NotFoundPage from "./components/NotFoundPage";
 

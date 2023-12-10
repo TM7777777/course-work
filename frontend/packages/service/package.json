@@ -1,0 +1,14 @@
+{
+  "name": "work-service",
+  "version": "0.0.0",
+  "type": "module",
+  "dependencies": {
+    "axios": "^1.6.2",
+    "ramda": "^0.29.1"
+  },
+  "devDependencies": {
+    "@types/ramda": "^0.29.9",
+    "typescript": "^5.0.2",
+    "work-types": "*"
+  }
+}

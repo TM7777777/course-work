@@ -1,5 +1,4 @@
-import { IPerformanceIndicator } from "../../types/performanceIndicator";
-import { IReportDTO } from "../../types/report";
+import { IPerformanceIndicator, IReportDTO } from "work-types";
 import { ExtendModalProps } from "../index";
 
 export type PureProps = {

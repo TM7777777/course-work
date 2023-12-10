@@ -1,4 +1,4 @@
-import { IEnterprise } from "../../types/enterprise";
+import { IEnterprise } from "work-types/enterprise";
 import { ExtendModalProps } from "../index";
 
 export type PureProps = {

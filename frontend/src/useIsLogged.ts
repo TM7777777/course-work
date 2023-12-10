@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import cookies from "js-cookie";
 import { useLocation } from "wouter";
 
-import { IUser } from "../packages/types/user";
+import { IUser } from "work-types/user";
 
 export const useIsLogged = () => {
   const [role, setRole] = useState<IUser["role"] | null>(null);

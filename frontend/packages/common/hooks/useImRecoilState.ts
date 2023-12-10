@@ -2,7 +2,7 @@ import { RecoilState, useRecoilState } from "recoil";
 import { produce } from "immer";
 import isFunction from "lodash/isFunction";
 import ifElse from "ramda/src/ifElse";
-import { DraftProp, StateProp } from "../../types/recoil";
+import { DraftProp, StateProp } from "work-types/recoil";
 
 /**
  * Hook that allows you to mutate the previous state because of immer

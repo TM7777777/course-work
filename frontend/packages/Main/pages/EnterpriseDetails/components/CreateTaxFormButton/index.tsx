@@ -3,14 +3,13 @@ import { useParams } from "wouter";
 import { useRecoilValue } from "recoil";
 import { Button } from "@mui/material";
 
-import service from "../../../../../service";
+import { useShowModal } from "work-modals";
+import { openTaxForm } from "work-modals/TaxFormModal";
+import { useImSetRecoilState } from "work-common/hooks/useImSetRecoilState";
+import { performanceIndicatorsState } from "work-common/state/performanceIndicators";
+import service from "work-service";
 
-import { openTaxForm } from "../../../../../modals/TaxFormModal";
-import { useShowModal } from "../../../../../modals";
 import { selectedEnterprise } from "../../../../state/selectedEnterprise";
-import { useImSetRecoilState } from "../../../../../common/hooks/useImSetRecoilState";
-
-import { performanceIndicatorsState } from "../../../../../common/state/performanceIndicators";
 
 const TaxFormCreateButton = () => {
   const { enterpriseId } = useParams();

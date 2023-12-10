@@ -1,11 +1,9 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useSetRecoilState } from "recoil";
 
-import Loader from "../../../common/components/Loader";
-import { performanceIndicatorsState } from "../../../common/state/performanceIndicators";
-
-import service from "../../../service";
+import Loader from "work-common/components/Loader";
+import { performanceIndicatorsState } from "work-common/state/performanceIndicators";
+import service from "work-service";
 
 export const withLoadInitData =
   (Component: React.FC): React.FC =>

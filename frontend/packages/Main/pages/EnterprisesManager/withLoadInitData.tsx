@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
-import Loader from "../../../common/components/Loader";
-import service from "../../../service";
+import Loader from "work-common/components/Loader";
+import service from "work-service";
 
 import { enterprisesState } from "../../state/enterprises";
 import { enterprisesTotalIncomeState } from "../../state/enterprisesTotalIncome";
