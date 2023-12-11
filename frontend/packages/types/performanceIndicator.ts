@@ -6,7 +6,6 @@ export interface IPerformanceIndicator {
   description: string;
   unit_of_measurement: string;
   importance: number;
-  indicator: string;
 }
 
 export interface Indicator {

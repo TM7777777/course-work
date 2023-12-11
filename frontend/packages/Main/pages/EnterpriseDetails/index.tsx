@@ -12,6 +12,18 @@ import PerformanceGraph from "./components/PerformanceGraph";
 import CreateTaxFormButton from "./components/CreateTaxFormButton";
 import { withLoadInitData } from "./withLoadInitData";
 
+const sortValues = (arr: Indicator["values"]) =>
+  arr.sort((a, b) => {
+    const [yearA, quarterA] = a.report_period.split("_");
+    const [yearB, quarterB] = b.report_period.split("_");
+
+    if (yearA === yearB) {
+      return quarterA.localeCompare(quarterB);
+    }
+
+    return yearA.localeCompare(yearB);
+  });
+
 const EnterpriseDetails = () => {
   const { enterprise, reports } = useRecoilValue(selectedEnterprise);
   const performanceIndicators = useRecoilValue(performanceIndicatorsState);
@@ -22,13 +34,15 @@ const EnterpriseDetails = () => {
         indicator_id: ind.indicator_id,
         name: ind.name,
         importance: ind.importance,
-        values: reports.reduce<Indicator["values"]>((acc, rp) => {
-          if (Object.prototype.hasOwnProperty.call(rp.fin_values, ind.indicator)) {
-            acc.push({ report_period: rp.report_period, value: rp.fin_values[ind.indicator] });
-          }
+        values: sortValues(
+          reports.reduce<Indicator["values"]>((acc, rp) => {
+            if (Object.prototype.hasOwnProperty.call(rp.fin_values, ind.indicator_id)) {
+              acc.push({ report_period: rp.report_period, value: rp.fin_values[ind.indicator_id] });
+            }
 
-          return acc;
-        }, []),
+            return acc;
+          }, []),
+        ),
       })) as Indicator[],
     [performanceIndicators, reports],
   );

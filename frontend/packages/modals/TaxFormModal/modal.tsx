@@ -33,7 +33,12 @@ const style = {
 
 const TaxForm = ({ onClose, onSubmit, performanceIndicators }: Props) => {
   const indicators = [
-    { name: "Дохід", indicator: "income", indicator_id: "uniq-id", description: "Весь дохід" },
+    {
+      name: "Дохід",
+      indicator_id: "income",
+      description: "Весь дохід до вирахування будь-яких витрат або податків",
+      unit_of_measurement: "UAH",
+    },
     ...performanceIndicators,
   ] as IPerformanceIndicator[];
 
@@ -45,7 +50,7 @@ const TaxForm = ({ onClose, onSubmit, performanceIndicators }: Props) => {
       ...indicators.reduce(
         (acc, pfInd) => ({
           ...acc,
-          [pfInd.indicator]: 0,
+          [pfInd.indicator_id]: 0,
         }),
         {},
       ),
@@ -57,7 +62,7 @@ const TaxForm = ({ onClose, onSubmit, performanceIndicators }: Props) => {
       ...indicators.reduce(
         (acc, pfInd) => ({
           ...acc,
-          [pfInd.indicator]: Yup.number().required(`${pfInd.name} є обов’язковим`),
+          [pfInd.indicator_id]: Yup.number().required(`${pfInd.name} є обов’язковим`),
         }),
         {},
       ),
@@ -135,17 +140,22 @@ const TaxForm = ({ onClose, onSubmit, performanceIndicators }: Props) => {
                   fullWidth
                   label={pfInd.name}
                   type="number"
-                  name={pfInd.indicator}
+                  name={pfInd.indicator_id}
                   // @ts-ignore
-                  value={formik.values[pfInd.indicator]}
+                  value={formik.values[pfInd.indicator_id]}
                   onChange={formik.handleChange}
-                  // @ts-ignore
-                  error={formik.touched[pfInd.indicator] && Boolean(formik.errors[pfInd.indicator])}
-                  // @ts-ignore
-                  helperText={formik.touched[pfInd.indicator] && formik.errors[pfInd.indicator]}
+                  error={
+                    // @ts-ignore
+                    formik.touched[pfInd.indicator_id] && Boolean(formik.errors[pfInd.indicator_id])
+                  }
+                  helperText={
+                    // @ts-ignore
+                    formik.touched[pfInd.indicator_id] && formik.errors[pfInd.indicator_id]
+                  }
                 />
                 {pfInd.description}
               </TableCell>
+              <TableCell>{`${pfInd.unit_of_measurement}`}</TableCell>
             </TableRow>
           ))}
           <TableRow>

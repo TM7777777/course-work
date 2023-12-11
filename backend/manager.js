@@ -483,11 +483,10 @@ app.post("/performance_indicator", function (req, res) {
   const description = req.body.description;
   const unitOfMeasurement = req.body.unit_of_measurement;
   const importance = req.body.importance;
-  const indicator = req.body.indicator;
 
   connection.query(
-    "INSERT INTO performance_indicators (indicator_id, name, description, unit_of_measurement, importance, indicator) VALUES (?,?,?,?,?,?)",
-    [indicatorId, name, description, unitOfMeasurement, importance, indicator],
+    "INSERT INTO performance_indicators (indicator_id, name, description, unit_of_measurement, importance) VALUES (?,?,?,?,?)",
+    [indicatorId, name, description, unitOfMeasurement, importance],
     function (err, data) {
       if (err) {
         console.log(err);
@@ -499,7 +498,6 @@ app.post("/performance_indicator", function (req, res) {
           description,
           unit_of_measurement: unitOfMeasurement,
           importance,
-          indicator,
         });
       }
     },

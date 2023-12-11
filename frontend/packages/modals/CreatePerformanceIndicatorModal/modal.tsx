@@ -20,7 +20,6 @@ const validationSchema = Yup.object({
   name: Yup.string().required("Name is required"),
   description: Yup.string().required("Description is required"),
   unit_of_measurement: Yup.string().required("Unit of measurment is required"),
-  indicator: Yup.string().required("Indicator key is required"),
   importance: Yup.number().required("Importance key is required"),
 });
 
@@ -30,7 +29,6 @@ const CreatePerformanceIndicatorModal = ({ onClose, onSubmit: onSubmitPure }: Pr
       name: "",
       description: "",
       unit_of_measurement: "UAH",
-      indicator: "",
       importance: 1,
     },
     validationSchema: validationSchema,
@@ -96,18 +94,6 @@ const CreatePerformanceIndicatorModal = ({ onClose, onSubmit: onSubmitPure }: Pr
           onChange={formik.handleChange}
           error={formik.touched.importance && Boolean(formik.errors.importance)}
           helperText={formik.touched.importance && formik.errors.importance}
-        />
-        <TextField
-          margin="normal"
-          required
-          fullWidth
-          id="indicator"
-          label="Indicator Key"
-          name="indicator"
-          value={formik.values.indicator}
-          onChange={formik.handleChange}
-          error={formik.touched.indicator && Boolean(formik.errors.indicator)}
-          helperText={formik.touched.indicator && formik.errors.indicator}
         />
         <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }}>
           Submit
