@@ -123,7 +123,7 @@ const EnterprisesList = () => {
                     <br />
                     Contact: {enterprise.contact_person}
                     <br />
-                    Total income: {enterprisesTotalIncomeSet.get(enterprise.enterprise_id)}
+                    Total income: {enterprisesTotalIncomeSet.get(enterprise.enterprise_id) || 0} UAH
                   </>
                 }
               />

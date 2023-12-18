@@ -56,13 +56,13 @@ const TaxForm = ({ onClose, onSubmit, performanceIndicators }: Props) => {
       ),
     } as IReportDTO,
     validationSchema: Yup.object({
-      year: Yup.number().required("Рік є обов’язковим"),
-      quarter: Yup.number().required("Квартал є обов’язковим"),
-      payer: Yup.string().required("Ім’я платника є обов’язковим"),
+      year: Yup.number().required("Year is required"),
+      quarter: Yup.number().required("Quarter is required"),
+      payer: Yup.string().required("Payer name is required"),
       ...indicators.reduce(
         (acc, pfInd) => ({
           ...acc,
-          [pfInd.indicator_id]: Yup.number().required(`${pfInd.name} є обов’язковим`),
+          [pfInd.indicator_id]: Yup.number().required(`${pfInd.name} is required`),
         }),
         {},
       ),

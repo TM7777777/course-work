@@ -17,12 +17,12 @@ const style = {
 };
 
 const validationSchema = Yup.object({
-  name: Yup.string().required("Назва обов’язкова"),
-  details: Yup.string().required("Деталі обов’язкові"),
+  name: Yup.string().required("Name is required"),
+  details: Yup.string().required("Details is required"),
   phone: Yup.string()
-    .required("Телефон обов’язковий")
-    .matches(/^[0-9]+$/, "Номер телефону має містити лише цифри"),
-  contact_person: Yup.string().required("Контактна особа обов’язкова"),
+    .required("Phone number is required")
+    .matches(/^[0-9]+$/, "Phone number must contains only numbers"),
+  contact_person: Yup.string().required("Contact person is required"),
 });
 
 const CreateEnterprise = ({ onClose, onSubmit: onSubmitPure, title, initialValues }: Props) => {

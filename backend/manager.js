@@ -133,8 +133,10 @@ connection.query(createAfterEnterpriseDeleteTrigger, (error, results, fields) =>
 const createGetEnterpriseAndReportsProcedure = `
 CREATE PROCEDURE get_enterprise_and_reports(IN entId CHAR(36))
 BEGIN
-    SELECT * FROM enterprises WHERE enterprise_id = entId;
-    SELECT * FROM financial_reports WHERE enterprise_id = entId;
+    SELECT e.*, fr.*
+    FROM enterprises e
+    INNER JOIN financial_reports fr ON e.enterprise_id = fr.enterprise_id
+    WHERE e.enterprise_id = entId;
 END
 `;
 
@@ -193,7 +195,6 @@ app.post("/login", function (req, res) {
       return res.status(401).send("Email not found");
     }
 
-    // Перевірка пароля
     const user = results[0];
     if (user.password === password) {
       res.status(200).send(JSON.stringify({ user_id: user.user_id, role: user.role }));
@@ -216,7 +217,7 @@ app.get("/users", function (req, res) {
     return res.status(401).send("Permission denied");
   }
 
-  connection.query("SELECT * FROM users", function (err, data) {
+  connection.query("SELECT * FROM users ORDER BY created_at DESC;", function (err, data) {
     if (err) {
       console.log(err);
       res.status(500).send("Error while fetching users");
@@ -366,9 +367,25 @@ app.get("/enterprise/:enterpriseId", function (req, res) {
       return res.status(500).send("Error while retrieving data");
     }
 
+    if (results[0].length === 0) {
+      return res.status(404).send("Enterprise not found");
+    }
+
+    const enterpriseData = results[0][0];
+    const reports = results[0].map((row) => {
+      const { enterprise_id, name, details, contact_person, phone, ...reportData } = row;
+      return reportData;
+    });
+
     res.json({
-      enterprise: results[0][0],
-      reports: results[1],
+      enterprise: {
+        enterprise_id: enterpriseData.enterprise_id,
+        name: enterpriseData.name,
+        details: enterpriseData.details,
+        contact_person: enterpriseData.contact_person,
+        phone: enterpriseData.phone,
+      },
+      reports: reports,
     });
   });
 });
