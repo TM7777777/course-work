@@ -4,6 +4,7 @@ import { useRecoilValue } from "recoil";
 import { IReport } from "work-types/report";
 
 import { selectedEnterprise } from "../../../../state/selectedEnterprise";
+import { formatter } from "../../utils/formatter";
 
 const prepareData = (arr: IReport[]) =>
   arr
@@ -27,7 +28,7 @@ const PerformanceGraph = () => {
       <Line type="basis" dataKey="income" stroke="#8884d8" />
       <CartesianGrid stroke="#ccc" />
       <XAxis dataKey="report_period" />
-      <YAxis />
+      <YAxis tickFormatter={formatter.format} />
       <Tooltip />
     </LineChart>
   );

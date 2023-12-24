@@ -135,7 +135,7 @@ CREATE PROCEDURE get_enterprise_and_reports(IN entId CHAR(36))
 BEGIN
     SELECT e.*, fr.*
     FROM enterprises e
-    INNER JOIN financial_reports fr ON e.enterprise_id = fr.enterprise_id
+    LEFT JOIN financial_reports fr ON e.enterprise_id = fr.enterprise_id
     WHERE e.enterprise_id = entId;
 END
 `;
@@ -374,16 +374,19 @@ app.get("/enterprise/:enterpriseId", function (req, res) {
     const enterpriseData = results[0][0];
     const reports = results[0].map((row) => {
       const { enterprise_id, name, details, contact_person, phone, ...reportData } = row;
-      return reportData;
+      return Object.entries(reportData).reduce(
+        (acc, [key, value]) => Object.assign(acc, { [key]: value || "" }),
+        {},
+      );
     });
 
     res.json({
       enterprise: {
-        enterprise_id: enterpriseData.enterprise_id,
-        name: enterpriseData.name,
-        details: enterpriseData.details,
-        contact_person: enterpriseData.contact_person,
-        phone: enterpriseData.phone,
+        enterprise_id: enterpriseId,
+        name: enterpriseData.name || "",
+        details: enterpriseData.details || "",
+        contact_person: enterpriseData.contact_person || "",
+        phone: enterpriseData.phone || "",
       },
       reports: reports,
     });

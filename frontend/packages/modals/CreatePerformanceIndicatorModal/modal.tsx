@@ -3,6 +3,8 @@ import { Button, Modal, Box, TextField, Typography, Select, MenuItem } from "@mu
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
+import { UnitOfMeasurement } from "work-types/performanceIndicator";
+
 import { Props } from "./types";
 
 const style = {
@@ -28,7 +30,7 @@ const CreatePerformanceIndicatorModal = ({ onClose, onSubmit: onSubmitPure }: Pr
     initialValues: {
       name: "",
       description: "",
-      unit_of_measurement: "UAH",
+      unit_of_measurement: UnitOfMeasurement.UAH,
       importance: 1,
     },
     validationSchema: validationSchema,
@@ -79,9 +81,9 @@ const CreatePerformanceIndicatorModal = ({ onClose, onSubmit: onSubmitPure }: Pr
           onChange={formik.handleChange}
           error={formik.touched.unit_of_measurement && Boolean(formik.errors.unit_of_measurement)}
           displayEmpty>
-          <MenuItem value={"UAH"}>UAH</MenuItem>
-          <MenuItem value={"USD"}>USD</MenuItem>
-          <MenuItem value={"EUR"}>EUR</MenuItem>
+          <MenuItem value={UnitOfMeasurement.UAH}>UAH</MenuItem>
+          <MenuItem value={UnitOfMeasurement.USD}>USD</MenuItem>
+          <MenuItem value={UnitOfMeasurement.EUR}>EUR</MenuItem>
         </Select>
         <TextField
           margin="normal"

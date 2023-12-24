@@ -48,10 +48,10 @@ const TaxForm = ({ onClose, onSubmit, performanceIndicators }: Props) => {
       quarter: 1,
       payer: "",
       ...indicators.reduce(
-        (acc, pfInd) => ({
-          ...acc,
-          [pfInd.indicator_id]: 0,
-        }),
+        (acc, pfInd) =>
+          Object.assign(acc, {
+            [pfInd.indicator_id]: 0,
+          }),
         {},
       ),
     } as IReportDTO,
@@ -60,10 +60,10 @@ const TaxForm = ({ onClose, onSubmit, performanceIndicators }: Props) => {
       quarter: Yup.number().required("Quarter is required"),
       payer: Yup.string().required("Payer name is required"),
       ...indicators.reduce(
-        (acc, pfInd) => ({
-          ...acc,
-          [pfInd.indicator_id]: Yup.number().required(`${pfInd.name} is required`),
-        }),
+        (acc, pfInd) =>
+          Object.assign(acc, {
+            [pfInd.indicator_id]: Yup.number().required(`${pfInd.name} is required`),
+          }),
         {},
       ),
     }),

@@ -1,10 +1,15 @@
 import { IReport } from "./report";
 
+export enum UnitOfMeasurement {
+  EUR = "EUR",
+  USD = "USD",
+  UAH = "UAH",
+}
 export interface IPerformanceIndicator {
   indicator_id: string;
   name: string;
   description: string;
-  unit_of_measurement: string;
+  unit_of_measurement: UnitOfMeasurement;
   importance: number;
 }
 

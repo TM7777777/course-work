@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 import { Typography, Paper, Divider, Grid } from "@mui/material";
 
 import { performanceIndicatorsState } from "work-common/state/performanceIndicators";
-import { Indicator } from "work-types/performanceIndicator";
+import { Indicator, UnitOfMeasurement } from "work-types/performanceIndicator";
 
 import { selectedEnterprise } from "../../state/selectedEnterprise";
 
@@ -11,6 +11,12 @@ import PerformanceIndicatorChart from "./components/PerformanceIndicatorChart";
 import PerformanceGraph from "./components/PerformanceGraph";
 import CreateTaxFormButton from "./components/CreateTaxFormButton";
 import { withLoadInitData } from "./withLoadInitData";
+
+const CURRENCY_VALUES = {
+  [UnitOfMeasurement.EUR]: 41.28,
+  [UnitOfMeasurement.USD]: 37.38,
+  [UnitOfMeasurement.UAH]: 1,
+};
 
 const sortValues = (arr: Indicator["values"]) =>
   arr.sort((a, b) => {
@@ -37,7 +43,13 @@ const EnterpriseDetails = () => {
         values: sortValues(
           reports.reduce<Indicator["values"]>((acc, rp) => {
             if (Object.prototype.hasOwnProperty.call(rp.fin_values, ind.indicator_id)) {
-              acc.push({ report_period: rp.report_period, value: rp.fin_values[ind.indicator_id] });
+              const value =
+                rp.fin_values[ind.indicator_id] * CURRENCY_VALUES[ind.unit_of_measurement];
+
+              acc.push({
+                report_period: rp.report_period,
+                value: +value.toFixed(2),
+              });
             }
 
             return acc;

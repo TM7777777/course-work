@@ -11,6 +11,8 @@ import {
 } from "recharts";
 import { Indicator } from "work-types/performanceIndicator";
 
+import { formatter } from "../../utils/formatter";
+
 interface Props {
   indicator: Indicator;
 }
@@ -25,7 +27,7 @@ const PerformanceIndicatorChart = ({ indicator }: Props) => {
         <LineChart data={indicator.values}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="report_period" />
-          <YAxis />
+          <YAxis tickFormatter={formatter.format} />
           <Tooltip />
           <Legend />
           <Line
