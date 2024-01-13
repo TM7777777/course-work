@@ -3,11 +3,10 @@ import { Card, ListItem, ListItemText, ListItemAvatar, Avatar, IconButton } from
 import DeleteIcon from "@mui/icons-material/Delete";
 
 import { useImRecoilState } from "work-common/hooks/useImRecoilState";
-import { useShowModal } from "work-modals";
+import { useShowModal } from "recoil-modals/dist/tools";
 import { openDeleteModal } from "work-modals/DeleteModal";
 import { IUser } from "work-types/user";
 import service from "work-service";
-
 import { usersState } from "../../../../state/users";
 
 const UsersList = () => {

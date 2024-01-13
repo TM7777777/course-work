@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import { Button } from "@mui/material";
 
 import { IEnterprise } from "work-types/enterprise";
-import { useShowModal } from "work-modals";
+import { useShowModal } from "recoil-modals/dist/tools";
 import { openEnterpriseModal } from "work-modals/EnterpriseModal";
 import { useImSetRecoilState } from "work-common/hooks/useImSetRecoilState";
 import service from "work-service";

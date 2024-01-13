@@ -1,5 +1,5 @@
+import { ExtendModalProps } from "recoil-modals/dist/types";
 import { IEnterprise } from "work-types/enterprise";
-import { ExtendModalProps } from "../index";
 
 export type PureProps = {
   onSubmit(enterprise: Omit<IEnterprise, "enterprise_id">): Promise<void>;

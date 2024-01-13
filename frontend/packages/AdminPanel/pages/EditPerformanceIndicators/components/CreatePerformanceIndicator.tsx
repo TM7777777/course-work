@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { Button } from "@mui/material";
 
-import { useShowModal } from "work-modals";
+import { useShowModal } from "recoil-modals/dist/tools";
 import { useImSetRecoilState } from "work-common/hooks/useImSetRecoilState";
 import { performanceIndicatorsState } from "work-common/state/performanceIndicators";
 import { openCreatePerformanceIndicator } from "work-modals/CreatePerformanceIndicatorModal";

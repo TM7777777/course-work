@@ -3,7 +3,7 @@ import { useParams } from "wouter";
 import { useRecoilValue } from "recoil";
 import { Button } from "@mui/material";
 
-import { useShowModal } from "work-modals";
+import { useShowModal } from "recoil-modals/dist/tools";
 import { openTaxForm } from "work-modals/TaxFormModal";
 import { useImSetRecoilState } from "work-common/hooks/useImSetRecoilState";
 import { performanceIndicatorsState } from "work-common/state/performanceIndicators";

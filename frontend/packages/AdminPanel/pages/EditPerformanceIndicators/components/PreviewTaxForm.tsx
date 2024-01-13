@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import { Button } from "@mui/material";
 import { useRecoilValue } from "recoil";
 
-import { useShowModal } from "work-modals";
+import { useShowModal } from "recoil-modals/dist/tools";
 import { openTaxForm } from "work-modals/TaxFormModal";
 import { performanceIndicatorsState } from "work-common/state/performanceIndicators";
 

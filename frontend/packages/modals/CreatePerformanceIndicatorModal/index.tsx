@@ -1,4 +1,4 @@
-import { createModal, loadModal } from "../index";
+import { createModal, loadModal } from "recoil-modals/dist/tools";
 import { PureProps } from "./types";
 
 const modal = createModal<PureProps>(

@@ -1,4 +1,4 @@
-import { ExtendModalProps } from "../index";
+import { ExtendModalProps } from "recoil-modals/dist/types";
 
 export type PureProps = {
   onDelete(): void;

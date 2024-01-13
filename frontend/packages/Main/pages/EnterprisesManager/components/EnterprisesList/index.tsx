@@ -5,7 +5,7 @@ import { Card, ListItem, ListItemText, ListItemAvatar, Avatar, IconButton } from
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 
-import { useShowModal } from "work-modals";
+import { useShowModal } from "recoil-modals/dist/tools";
 import { openDeleteModal } from "work-modals/DeleteModal";
 import { openEnterpriseModal } from "work-modals/EnterpriseModal";
 import { useImRecoilState } from "work-common/hooks/useImRecoilState";

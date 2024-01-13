@@ -4,7 +4,7 @@ import { Container, Typography } from "@mui/material";
 import { IPerformanceIndicator } from "work-types/performanceIndicator";
 import { performanceIndicatorsState } from "work-common/state/performanceIndicators";
 import { useImRecoilState } from "work-common/hooks/useImRecoilState";
-import { useShowModal } from "work-modals";
+import { useShowModal } from "recoil-modals/dist/tools";
 import { openDeleteModal } from "work-modals/DeleteModal";
 import service from "work-service";
 

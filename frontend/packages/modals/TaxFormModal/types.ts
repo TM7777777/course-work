@@ -1,5 +1,5 @@
+import { ExtendModalProps } from "recoil-modals/dist/types";
 import { IPerformanceIndicator, IReportDTO } from "work-types";
-import { ExtendModalProps } from "../index";
 
 export type PureProps = {
   onSubmit(report: Omit<IReportDTO, "enterprise_id">): Promise<void>;
