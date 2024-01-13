@@ -10,7 +10,9 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "clear": "rm -rf node_modules",
+    "rei": "npm run clear && npm install && npm ci && npm run dev"
   },
   "dependencies": {
     "js-cookie": "^3.0.5",
@@ -18,7 +20,7 @@
     "react-dom": "^18.2.0",
     "recoil": "^0.7.7",
     "wouter": "^2.12.1",
-    "recoil-modals": "1.0.1"
+    "recoil-modals": "1.0.2"
   },
   "devDependencies": {
     "@types/js-cookie": "^3.0.6",
