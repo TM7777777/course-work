@@ -26,7 +26,7 @@ const EnterpriseCreateButton = () => {
 
   const onClick = useCallback(() => {
     showModal(openEnterpriseModal({ onSubmit, title: "New Enterprise" }));
-  }, []);
+  }, [showModal]);
 
   return (
     <div>

@@ -17,7 +17,7 @@ const PreviewTaxForm = () => {
         performanceIndicators,
       }),
     );
-  }, [performanceIndicators]);
+  }, [showModal, performanceIndicators]);
 
   return (
     <div style={{ marginBottom: "20px" }}>

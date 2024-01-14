@@ -37,7 +37,7 @@ const TaxFormCreateButton = () => {
           performanceIndicators,
         }),
       ),
-    [performanceIndicators, setSelectedEnterprise],
+    [performanceIndicators, setSelectedEnterprise, showModal],
   );
 
   return (

@@ -25,7 +25,7 @@ const CreatePerformanceIndicator = () => {
 
   const onClick = useCallback(() => {
     showModal(openCreatePerformanceIndicator({ onSubmit }));
-  }, []);
+  }, [showModal]);
 
   return (
     <div style={{ marginBottom: "20px" }}>

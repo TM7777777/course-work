@@ -1,4 +1,5 @@
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useMemo, memo } from "react";
+import { Virtuoso } from "react-virtuoso";
 import { useLocation } from "wouter";
 import { useRecoilValue } from "recoil";
 import { Card, ListItem, ListItemText, ListItemAvatar, Avatar, IconButton } from "@mui/material";
@@ -14,6 +15,8 @@ import service from "work-service";
 
 import { enterprisesTotalIncomeState } from "../../../../state/enterprisesTotalIncome";
 import { enterprisesState } from "../../../../state/enterprises";
+
+const vitruosoStyle = { height: "80vh", width: "90vw" };
 
 const EnterprisesList = () => {
   const [enterprises, setEnterprises] = useImRecoilState(enterprisesState);
@@ -50,7 +53,7 @@ const EnterprisesList = () => {
           }),
         );
       },
-    [],
+    [showModal],
   );
 
   const onEdit = useCallback(
@@ -79,60 +82,60 @@ const EnterprisesList = () => {
     [],
   );
 
-  return (
-    <>
-      {enterprises.map((enterprise) => (
-        <Card
+  const renderItem = (index: number, enterprise = enterprises[index]) => (
+    <Card
+      key={enterprise.enterprise_id}
+      style={{ width: "80%", margin: "16px", boxShadow: "0 2px 5px rgba(0,0,0,0.2)" }}
+      sx={{
+        cursor: "pointer",
+        "&:hover": {
+          boxShadow:
+            "0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)",
+        },
+      }}
+      onClick={() => navigate(`/enterprise/${enterprise.enterprise_id}`)}>
+      <React.Fragment key={enterprise.enterprise_id}>
+        <ListItem
           key={enterprise.enterprise_id}
-          style={{ width: "80%", margin: "16px", boxShadow: "0 2px 5px rgba(0,0,0,0.2)" }}
-          sx={{
-            cursor: "pointer",
-            "&:hover": {
-              boxShadow:
-                "0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)",
-            },
-          }}
-          onClick={() => navigate(`/enterprise/${enterprise.enterprise_id}`)}>
-          <React.Fragment key={enterprise.enterprise_id}>
-            <ListItem
-              key={enterprise.enterprise_id}
-              secondaryAction={
-                <div>
-                  <IconButton edge="start" aria-label="edit" onClick={onEdit(enterprise)}>
-                    <EditIcon />
-                  </IconButton>
-                  <IconButton
-                    edge="end"
-                    aria-label="delete"
-                    onClick={onDelete(enterprise.enterprise_id)}>
-                    <DeleteIcon />
-                  </IconButton>
-                </div>
-              }
-              alignItems="flex-start">
-              <ListItemAvatar>
-                <Avatar alt={enterprise.name} />
-              </ListItemAvatar>
-              <ListItemText
-                primary={enterprise.name}
-                secondary={
-                  <>
-                    {enterprise.details}
-                    <br />
-                    Phone: {enterprise.phone}
-                    <br />
-                    Contact: {enterprise.contact_person}
-                    <br />
-                    Total income: {enterprisesTotalIncomeSet.get(enterprise.enterprise_id) || 0} UAH
-                  </>
-                }
-              />
-            </ListItem>
-          </React.Fragment>
-        </Card>
-      ))}
-    </>
+          secondaryAction={
+            <div>
+              <IconButton edge="start" aria-label="edit" onClick={onEdit(enterprise)}>
+                <EditIcon />
+              </IconButton>
+              <IconButton
+                edge="end"
+                aria-label="delete"
+                onClick={onDelete(enterprise.enterprise_id)}>
+                <DeleteIcon />
+              </IconButton>
+            </div>
+          }
+          alignItems="flex-start">
+          <ListItemAvatar>
+            <Avatar alt={enterprise.name}>{enterprise.name[0]}</Avatar>
+          </ListItemAvatar>
+          <ListItemText
+            primary={enterprise.name}
+            secondary={
+              <>
+                {enterprise.details}
+                <br />
+                Phone: {enterprise.phone}
+                <br />
+                Contact: {enterprise.contact_person}
+                <br />
+                Total income: {enterprisesTotalIncomeSet.get(enterprise.enterprise_id) || 0} UAH
+              </>
+            }
+          />
+        </ListItem>
+      </React.Fragment>
+    </Card>
+  );
+
+  return (
+    <Virtuoso style={vitruosoStyle} totalCount={enterprises.length} itemContent={renderItem} />
   );
 };
 
-export default EnterprisesList;
+export default memo(EnterprisesList);
