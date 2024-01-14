@@ -1,7 +1,7 @@
 # Course Work
 
 ## Frontend stack:
-Monorepo (micro-frontend), React + TS, MaterialUI
+Monorepo (micro-frontend), React + TS, MaterialUI, react-virtuoso
 
 State manager: Recoil
 
