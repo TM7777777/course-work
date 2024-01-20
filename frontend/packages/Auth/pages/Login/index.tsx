@@ -1,10 +1,11 @@
 import React from "react";
-import сookies from "js-cookie";
 import { useLocation, Link } from "wouter";
 import { Paper, Box, TextField, Button, Typography, Container } from "@mui/material";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import service from "work-service";
+import { save } from "work-common/utils/localStorage";
+import { useAuth } from "../../authContext";
 
 const paperStyle = {
   padding: "20px",
@@ -26,6 +27,7 @@ const validationSchema = yup.object({
 });
 
 const LoginPage: React.FC = () => {
+  const { setUser } = useAuth();
   const [_, navigate] = useLocation();
 
   const formik = useFormik({
@@ -35,18 +37,13 @@ const LoginPage: React.FC = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      service.login(values).then(({ user_id, role }) => {
-        сookies.set("user_id", user_id, {
-          expires: 1,
-          sameSite: "none",
-          secure: true,
-        });
+      service.login(values).then((user) => {
+        const { accessToken, role, email } = user;
+        const dto = { role, email };
 
-        сookies.set("role", role, {
-          expires: 1,
-          sameSite: "none",
-          secure: true,
-        });
+        save("accessToken", accessToken);
+        save("user", dto);
+        setUser(dto);
 
         return navigate("/enterprises");
       });

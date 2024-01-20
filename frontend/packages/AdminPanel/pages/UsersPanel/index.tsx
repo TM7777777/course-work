@@ -1,6 +1,6 @@
 import React from "react";
 import Logout from "work-common/components/Logout";
-
+import service from "work-service";
 import UsersList from "./components/UserList";
 import EditPerformanceIndicatorsButton from "./components/EditPerformanceIndicatorsButton";
 
@@ -17,7 +17,7 @@ const UsersPanel = () => (
         marginTop: "20px",
       }}>
       <EditPerformanceIndicatorsButton />
-      <Logout />
+      <Logout logout={() => service.logout()} />
     </div>
     <div
       style={{

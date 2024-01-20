@@ -6,10 +6,9 @@ import Auth from "work-auth";
 import Main from "work-main";
 import wrapDynamicImport from "work-common/hocs/wrapDynamicImport";
 import { Role } from "work-types";
+import { useAuth } from "work-auth/authContext";
 
 import NotFoundPage from "./components/NotFoundPage";
-
-import { useIsLogged } from "./useIsLogged";
 
 const panels = {
   [Role.USER]: (
@@ -40,7 +39,8 @@ const logPanel = (
 );
 
 const App: React.FC = () => {
-  const role = useIsLogged();
+  const { user } = useAuth();
+  const role = user?.role;
 
   return (
     <Router>

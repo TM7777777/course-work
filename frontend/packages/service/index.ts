@@ -10,17 +10,50 @@ import {
   IReportDTO,
   IUser,
 } from "work-types";
+import { load, save } from "work-common/utils/localStorage";
 
+const BASE_URL = "http://localhost:4500";
+
+const agent = axios.create({
+  withCredentials: true,
+  baseURL: BASE_URL,
+});
+
+agent.interceptors.request.use((config) => {
+  const token = load("accessToken");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
+agent.interceptors.response.use(
+  (config) => {
+    return config;
+  },
+  async (error) => {
+    const originalRequest = error.config;
+    if (error.response.status == 403 && error.config && !error.config._isRetry) {
+      originalRequest._isRetry = true;
+      try {
+        const response = await axios.get(`${BASE_URL}/refresh`, {
+          withCredentials: true,
+        });
+        save("accessToken", response.data.accessToken);
+        save("user", { email: response.data.email, role: response.data.role });
+        return agent.request(originalRequest);
+      } catch (e) {
+        console.log("Unathorized!");
+      }
+    }
+    throw error;
+  },
+);
 class API {
-  protected BASE_URL: string = "http://localhost:4500";
   instance: AxiosInstance;
 
   constructor() {
-    this.instance = axios.create({
-      withCredentials: true,
-      baseURL: this.BASE_URL,
-      headers: { "Content-Type": "application/json" },
-    });
+    this.instance = agent;
   }
 
   public async register(body: { email: string; password: string }) {
@@ -29,8 +62,17 @@ class API {
 
   public async login(body: { email: string; password: string }) {
     return await this.instance
-      .post<Pick<IUser, "user_id" | "role">>(`/login`, body)
+      .post<
+        Pick<IUser, "email" | "role"> & {
+          accessToken: string;
+          refreshToken: string;
+        }
+      >(`/login`, body)
       .then(prop("data"));
+  }
+
+  public async logout(): Promise<void> {
+    return await this.instance.post(`/logout`);
   }
 
   public async getUsers() {

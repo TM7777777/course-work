@@ -1,6 +1,7 @@
 import React from "react";
 
 import Logout from "work-common/components/Logout";
+import service from "work-service";
 
 import EnterpriseCreateButton from "./components/EnterpriseCreateButton";
 import EnterprisesList from "./components/EnterprisesList";
@@ -16,7 +17,7 @@ const EnterprisesManager = () => (
         width: "100%",
         paddingRight: "20px",
       }}>
-      <Logout />
+      <Logout logout={() => service.logout()} />
     </div>
     <div
       style={{

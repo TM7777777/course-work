@@ -17,6 +17,8 @@
     "@types/lodash": "^4.14.202",
     "@types/react": "^18.0.37",
     "typescript": "^5.0.2",
-    "work-service": "*"
+    "work-service": "*",
+    "work-common": "*",
+    "work-types": "*"
   }
 }

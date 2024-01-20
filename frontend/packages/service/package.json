@@ -9,6 +9,7 @@
   "devDependencies": {
     "@types/ramda": "^0.29.9",
     "typescript": "^5.0.2",
-    "work-types": "*"
+    "work-types": "*",
+    "work-common": "*"
   }
 }

@@ -1,17 +1,20 @@
 import React from "react";
 import Button from "@mui/material/Button";
 import { useLocation } from "wouter";
-import Cookies from "js-cookie";
 
-const Logout = () => {
+interface Props {
+  logout: () => Promise<void>;
+}
+
+const Logout = ({ logout }: Props) => {
   const [_, navigate] = useLocation();
 
-  const handleLogout = () => {
-    Cookies.remove("user_id");
-    Cookies.remove("role");
-
-    navigate("/login");
-  };
+  const handleLogout = () =>
+    logout().then(
+      () => (
+        localStorage.removeItem("accessToken"), localStorage.removeItem("user"), navigate("/login")
+      ),
+    );
 
   return (
     <Button variant="contained" color="primary" onClick={handleLogout}>

@@ -1,18 +1,26 @@
-exports.isAuthenticated = (req, res, next) => {
-  const userId = req.cookies.user_id;
+const jwt = require("jsonwebtoken");
 
-  if (!userId) {
-    return res.status(401).send("Unauthorized");
+exports.isAuthenticated = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+
+  if (!authHeader) {
+    return res.status(401).send("Unauthorized!");
   }
 
-  next();
+  const token = authHeader.split(" ")[1];
+  jwt.verify(token, "secretAccessKey", (err, user) => {
+    if (err) {
+      return res.status(403).json("Token is invalid!");
+    }
+
+    req.user = user;
+    next();
+  });
 };
 
 exports.isAdmin = (req, res, next) => {
-  const role = req.cookies.role;
-
-  if (role !== "admin") {
-    return res.status(401).send("Permission denied");
+  if (req.user.role !== "admin") {
+    return res.status(403).send("Permission denied!");
   }
 
   next();

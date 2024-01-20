@@ -4,7 +4,7 @@ const connection = require("../models/db");
 exports.getEnterprises = (req, res) =>
   connection.query(
     "SELECT * FROM enterprises WHERE user_id = ?",
-    [req.cookies.user_id],
+    [req.user.user_id],
     (err, data) => {
       if (err) {
         console.log(err);
@@ -16,7 +16,7 @@ exports.getEnterprises = (req, res) =>
   );
 
 exports.createEnterprise = (req, res) => {
-  const userId = req.cookies.user_id;
+  const userId = req.user.user_id;
   const name = req.body.name;
   const details = req.body.details;
   const phone = req.body.phone;

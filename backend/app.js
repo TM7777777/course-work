@@ -11,7 +11,6 @@ const performanceIndicatorRoutes = require("./routes/performanceIndicatorRoutes"
 
 const app = express();
 
-app.set("view engine", "hbs");
 app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(express.json());
